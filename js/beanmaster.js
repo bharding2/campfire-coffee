@@ -26,7 +26,7 @@ var pikePlaceMarket = {
     var numToGoLbs = numCustomers * this.lbsPerCustomer;
 
     var listEl = document.createElement('li');
-    listEl.textContent = hour + ' : ' + totalLbs + ' lbs [' + numCustomers + ' customers, ' + numCups + ' cups (' + numCupsLbs + ' lbs), ' + numToGoLbs + ' lbs to-go]';
+    listEl.textContent = hour + ' : ' + totalLbs.toFixed(2) + ' lbs [' + numCustomers + ' customers, ' + numCups.toFixed(2) + ' cups (' + numCupsLbs.toFixed(2) + ' lbs), ' + numToGoLbs.toFixed(2) + ' lbs to-go]';
     return listEl;
   },
 
