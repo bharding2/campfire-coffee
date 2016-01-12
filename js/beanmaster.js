@@ -1,7 +1,9 @@
 //beanmaster tools for data.html
+"use strict";
 
 var pikePlaceMarket = {
 //data provided by Jo Kuppa
+  name: 'Pike Place Market',
   id: 'pikePlaceMarket',
   minCustomers: 14,
   maxCustomers: 55,
@@ -9,31 +11,47 @@ var pikePlaceMarket = {
   lbsPerCustomer: 3.7,
   hoursOpen: ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12 noon', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm'],
 
-  numCustomersHour: function () {
-    return Math.floor(Math.random() * (this.maxCustomers - this.minCustomers)) + this.minCustomers;
+  calcNumCustomersHour: function () {
+    return Math.floor(Math.random() * (this.maxCustomers - this.minCustomers + 1)) + this.minCustomers;
   },
 
-  calculateLbsHour: function (customers) {
+  calcLbsHour: function (customers) {
     return customers * this.lbsPerCustomer + (customers * this.cupsPerCustomer)/20;
   },
 
-  writeListHour: function (time) {
+  calcNumCups: function (customers) {
+    return customers * this.cupsPerCustomer;
+  },
+
+  calcNumCupsLbs: function (cups) {
+    return cups/20;
+  },
+
+  calcNumToGoLbs: function (customers) {
+    return customers * this.lbsPerCustomer;
+  },
+
+  renderListHour: function (time) {
     var hour = this.hoursOpen[time];
-    var numCustomers = this.numCustomersHour();
-    var totalLbs = this.calculateLbsHour(numCustomers);
-    var numCups = numCustomers * this.cupsPerCustomer;
-    var numCupsLbs = numCups/20;
-    var numToGoLbs = numCustomers * this.lbsPerCustomer;
+    var numCustomers = this.calcNumCustomersHour();
+    var totalLbs = this.calcLbsHour(numCustomers);
+    //+= Daily total lbs?
+    var numCups = this.calcNumCups(numCustomers);
+    //+= Daily total cups?
+    var numCupsLbs = this.calcNumCupsLbs(numCups);
+    //+= Daily total cupLbs?
+    var numToGoLbs = this.calcNumToGoLbs(numCustomers);
+    //+= Daily total ToGoLBs?
 
     var listEl = document.createElement('li');
     listEl.textContent = hour + ' : ' + totalLbs.toFixed(2) + ' lbs [' + numCustomers + ' customers, ' + numCups.toFixed(2) + ' cups (' + numCupsLbs.toFixed(2) + ' lbs), ' + numToGoLbs.toFixed(2) + ' lbs to-go]';
     return listEl;
   },
 
-  createFullList: function () {
+  renderFullList: function () {
     var writeUl = document.getElementById(this.id);
-    for (i = 0; i < this.hoursOpen.length; i++) {
-      writeUl.appendChild(this.writeListHour(i));
+    for (var i = 0; i < this.hoursOpen.length; i++) {
+      writeUl.appendChild(this.renderListHour(i));
     }
   }
 };
@@ -49,7 +67,7 @@ var capitolHill = {
   hoursOpen: ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12 noon', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm'],
 
   numCustomersHour: function () {
-    return Math.floor(Math.random() * (this.maxCustomers - this.minCustomers)) + this.minCustomers;
+    return Math.floor(Math.random() * (this.maxCustomers - this.minCustomers + 1)) + this.minCustomers;
   },
 
   calculateLbsHour: function (customers) {
@@ -71,7 +89,7 @@ var capitolHill = {
 
   createFullList: function () {
     var writeUl = document.getElementById(this.id);
-    for (i = 0; i < this.hoursOpen.length; i++) {
+    for (var i = 0; i < this.hoursOpen.length; i++) {
       writeUl.appendChild(this.writeListHour(i));
     }
   }
@@ -87,7 +105,7 @@ var seattlePublicLibrary = {
   hoursOpen: ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12 noon', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm'],
 
   numCustomersHour: function () {
-    return Math.floor(Math.random() * (this.maxCustomers - this.minCustomers)) + this.minCustomers;
+    return Math.floor(Math.random() * (this.maxCustomers - this.minCustomers + 1)) + this.minCustomers;
   },
 
   calculateLbsHour: function (customers) {
@@ -109,7 +127,7 @@ var seattlePublicLibrary = {
 
   createFullList: function () {
     var writeUl = document.getElementById(this.id);
-    for (i = 0; i < this.hoursOpen.length; i++) {
+    for (var i = 0; i < this.hoursOpen.length; i++) {
       writeUl.appendChild(this.writeListHour(i));
     }
   }
@@ -125,7 +143,7 @@ var southLakeUnion = {
   hoursOpen: ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12 noon', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm'],
 
   numCustomersHour: function () {
-    return Math.floor(Math.random() * (this.maxCustomers - this.minCustomers)) + this.minCustomers;
+    return Math.floor(Math.random() * (this.maxCustomers - this.minCustomers + 1)) + this.minCustomers;
   },
 
   calculateLbsHour: function (customers) {
@@ -147,7 +165,7 @@ var southLakeUnion = {
 
   createFullList: function () {
     var writeUl = document.getElementById(this.id);
-    for (i = 0; i < this.hoursOpen.length; i++) {
+    for (var i = 0; i < this.hoursOpen.length; i++) {
       writeUl.appendChild(this.writeListHour(i));
     }
   }
@@ -163,7 +181,7 @@ var seatacAirport = {
   hoursOpen: ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12 noon', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm'],
 
   numCustomersHour: function () {
-    return Math.floor(Math.random() * (this.maxCustomers - this.minCustomers)) + this.minCustomers;
+    return Math.floor(Math.random() * (this.maxCustomers - this.minCustomers + 1)) + this.minCustomers;
   },
 
   calculateLbsHour: function (customers) {
@@ -185,7 +203,7 @@ var seatacAirport = {
 
   createFullList: function () {
     var writeUl = document.getElementById(this.id);
-    for (i = 0; i < this.hoursOpen.length; i++) {
+    for (var i = 0; i < this.hoursOpen.length; i++) {
       writeUl.appendChild(this.writeListHour(i));
     }
   }
@@ -201,7 +219,7 @@ var webSales = {
   hoursOpen: ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12 noon', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm'],
 
   numCustomersHour: function () {
-    return Math.floor(Math.random() * (this.maxCustomers - this.minCustomers)) + this.minCustomers;
+    return Math.floor(Math.random() * (this.maxCustomers - this.minCustomers + 1)) + this.minCustomers;
   },
 
   calculateLbsHour: function (customers) {
@@ -223,13 +241,13 @@ var webSales = {
 
   createFullList: function () {
     var writeUl = document.getElementById(this.id);
-    for (i = 0; i < this.hoursOpen.length; i++) {
+    for (var i = 0; i < this.hoursOpen.length; i++) {
       writeUl.appendChild(this.writeListHour(i));
     }
   }
 };
 
-pikePlaceMarket.createFullList();
+pikePlaceMarket.renderFullList();
 capitolHill.createFullList();
 seattlePublicLibrary.createFullList();
 southLakeUnion.createFullList();
