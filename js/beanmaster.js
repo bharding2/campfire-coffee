@@ -4,57 +4,99 @@
 var pikePlaceMarket = {
 //data provided by Jo Kuppa
   name: 'Pike Place Market',
-  id: 'pikePlaceMarket',
   minCustomers: 14,
   maxCustomers: 55,
   cupsPerCustomer: 1.2,
   lbsPerCustomer: 3.7,
   hoursOpen: ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12 noon', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm'],
+  numCustomersHour: [],
+  numLbsHour: [],
+  numCupsHour: [],
+  numCupsLbsHour: [],
+  numToGoLbsHour: [],
+  numDailyTotalCustomers: 0,
+  numDailyTotalLbs: 0,
+  numDailyTotalCups: 0,
+  numDailyTotalCupsLbs: 0,
+  numDailyTotalToGoLbs: 0,
 
   calcNumCustomersHour: function () {
     return Math.floor(Math.random() * (this.maxCustomers - this.minCustomers + 1)) + this.minCustomers;
   },
 
-  calcLbsHour: function (customers) {
+  calcNumLbsHour: function (customers) {
     return customers * this.lbsPerCustomer + (customers * this.cupsPerCustomer)/20;
   },
 
-  calcNumCups: function (customers) {
+  calcNumCupsHour: function (customers) {
     return customers * this.cupsPerCustomer;
   },
 
-  calcNumCupsLbs: function (cups) {
-    return cups/20;
+  calcNumCupsLbsHour: function (customers) {
+    return customers * this.cupsPerCustomer/20;
   },
 
-  calcNumToGoLbs: function (customers) {
+  calcNumToGoLbsHour: function (customers) {
     return customers * this.lbsPerCustomer;
   },
 
-  renderListHour: function (time) {
-    var hour = this.hoursOpen[time];
+  createHour: function (hour) {
     var numCustomers = this.calcNumCustomersHour();
-    var totalLbs = this.calcLbsHour(numCustomers);
-    //+= Daily total lbs?
-    var numCups = this.calcNumCups(numCustomers);
-    //+= Daily total cups?
-    var numCupsLbs = this.calcNumCupsLbs(numCups);
-    //+= Daily total cupLbs?
-    var numToGoLbs = this.calcNumToGoLbs(numCustomers);
-    //+= Daily total ToGoLBs?
+    this.numCustomersHour.push(numCustomers);
+    this.numDailyTotalCustomers += this.numCustomersHour[hour];
 
+    this.numLbsHour.push(this.calcNumLbsHour(numCustomers));
+    this.numDailyTotalLbs += this.numLbsHour[hour];
+
+    this.numCupsHour.push(this.calcNumCupsHour(numCustomers));
+    this.numDailyTotalCups += this.numCupsHour[hour];
+
+    this.numCupsLbsHour.push(this.calcNumCupsLbsHour(numCustomers));
+    this.numDailyTotalCupsLbs += this.numCupsLbsHour[hour];
+
+    this.numToGoLbsHour.push(this.calcNumToGoLbsHour(numCustomers));
+    this.numDailyTotalToGoLbs += this.numToGoLbsHour[hour];
+  },
+
+  createDay: function () {
+    for (var i = 0; i < this.hoursOpen.length; i++) {
+      this.createHour(i);
+    }
+  },
+
+  renderListHour: function (hour) {
     var listEl = document.createElement('li');
-    listEl.textContent = hour + ' : ' + totalLbs.toFixed(2) + ' lbs [' + numCustomers + ' customers, ' + numCups.toFixed(2) + ' cups (' + numCupsLbs.toFixed(2) + ' lbs), ' + numToGoLbs.toFixed(2) + ' lbs to-go]';
+    listEl.textContent = this.hoursOpen[hour] + ' : ' + this.numLbsHour[hour].toFixed(2) + ' lbs [' + this.numCustomersHour[hour] + ' customers, ' + this.numCupsHour[hour].toFixed(2) + ' cups (' + this.numCupsLbsHour[hour].toFixed(2) + ' lbs), ' + this.numToGoLbsHour[hour].toFixed(2) + ' lbs to-go]';
     return listEl;
   },
 
+  renderTotals: function () {
+    var totalEl = document.createElement('li');
+    totalEl.textContent = 'Total : ' + this.numDailyTotalLbs.toFixed(2) + ' lbs [' + this.numDailyTotalCustomers + ' customers, ' + this.numDailyTotalCups.toFixed(2) + ' cups (' + this.numDailyTotalCupsLbs.toFixed(2) + ' lbs), ' + this.numDailyTotalToGoLbs.toFixed(2) + ' lbs to-go]';
+    return totalEl;
+  },
+
   renderFullList: function () {
-    var writeUl = document.getElementById(this.id);
-    for (var i = 0; i < this.hoursOpen.length; i++) {
-      writeUl.appendChild(this.renderListHour(i));
+    this.createDay();
+    var sectionEl = document.getElementById('data');
+
+    var pEl = document.createElement('p');
+    pEl.appendChild(document.createTextNode(this.name));
+    sectionEl.appendChild(pEl);
+
+    var ulEl = document.createElement('ul');
+    sectionEl.appendChild(ulEl);
+
+    for (var j = 0; j < this.hoursOpen.length; j++) {
+    ulEl.appendChild(this.renderListHour(j));
     }
+    ulEl.appendChild(this.renderTotals());
   }
 };
+
+
+
+
 
 
 var capitolHill = {
@@ -248,8 +290,8 @@ var webSales = {
 };
 
 pikePlaceMarket.renderFullList();
-capitolHill.createFullList();
-seattlePublicLibrary.createFullList();
-southLakeUnion.createFullList();
-seatacAirport.createFullList();
-webSales.createFullList();
+// capitolHill.createFullList();
+// seattlePublicLibrary.createFullList();
+// southLakeUnion.createFullList();
+// seatacAirport.createFullList();
+// webSales.createFullList();
