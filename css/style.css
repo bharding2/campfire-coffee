@@ -1,1 +1,32 @@
-/* css will be in here
+body {
+  font-family: "Courier New", courier, monospace;
+  color: #E27821;
+  background-color: #2C3C5F;
+}
+
+table, tr, td, th {
+  border-collapse: collapse;
+  border: 1px solid #1D222C;
+}
+
+tr:nth-child(odd) {
+  background-color: #213521;
+}
+
+tr:nth-child(even) {
+  background-color: #674C35;
+}
+
+th {
+  text-align: center;
+  background-color: #273045;
+}
+
+td {
+  text-align : right;
+  padding: 10px;
+}
+
+h3 {
+  color: #299129;
+}
