@@ -111,15 +111,20 @@ webSales.renderFullList();
 
 
 function renderTotalLbsByHour () {
+//table creation including label
   var sectionEl = document.getElementById('data');
-  var tableEl = document.createElement('table');
 
+  var pLabel = document.createElement('p');
+  pLabel.textContent = 'Total Pounds Sold Per Hour By Location'
+  sectionEl.appendChild(pLabel);
+
+  var tableEl = document.createElement('table');
   sectionEl.appendChild(tableEl);
 
 //header
   var trHead = document.createElement('tr');
   tableEl.appendChild(trHead);
-  
+
   var thLoc = document.createElement('th');
   thLoc.textContent = 'Location';
   trHead.appendChild(thLoc);
@@ -130,6 +135,7 @@ function renderTotalLbsByHour () {
     trHead.appendChild(newTh);
   }
 
+//Rendering data for each kiosk
   function renderKioskRow (kiosk) {
     var newTr = document.createElement('tr');
     tableEl.appendChild(newTr);
@@ -139,9 +145,9 @@ function renderTotalLbsByHour () {
     newTr.appendChild(newTd);
 
     for (var f = 0; f < kiosk.numLbsHour.length; f++) {
-      var newTd = document.createElement('td');
-      newTd.textContent = kiosk.numLbsHour[f].toFixed(2);
-      newTr.appendChild(newTd);
+      var tdData = document.createElement('td');
+      tdData.textContent = kiosk.numLbsHour[f].toFixed(2);
+      newTr.appendChild(tdData);
     }
   }
 
