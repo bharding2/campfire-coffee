@@ -94,7 +94,7 @@ function Kiosk (name, minCustomers, maxCustomers, cupsPerCustomer, lbsPerCustome
 }
 
 //data provided by Jo Kuppa
-var pikePlaceMarket = new Kiosk('Pike Place Market', 14, 55, 1.2, 37);
+var pikePlaceMarket = new Kiosk('Pike Place Market', 14, 55, 1.2, 3.7);
 var capitolHill = new Kiosk('Capitol Hill', 32, 48, 3.2, 0.4);
 var seattlePublicLibrary = new Kiosk('Seattle Public Library', 49, 75, 2.6, 0.2);
 var southLakeUnion = new Kiosk('South Lake Union', 35, 88, 1.3, 3.7);
@@ -107,3 +107,50 @@ seattlePublicLibrary.renderFullList();
 southLakeUnion.renderFullList();
 seatacAirport.renderFullList();
 webSales.renderFullList();
+
+
+
+function renderTotalLbsByHour () {
+  var sectionEl = document.getElementById('data');
+  var tableEl = document.createElement('table');
+
+  sectionEl.appendChild(tableEl);
+
+//header
+  var trHead = document.createElement('tr');
+  tableEl.appendChild(trHead);
+  
+  var thLoc = document.createElement('th');
+  thLoc.textContent = 'Location';
+  trHead.appendChild(thLoc);
+
+  for (var h = 0; h < pikePlaceMarket.hoursOpen.length; h++) {
+    var newTh = document.createElement('th');
+    newTh.textContent = pikePlaceMarket.hoursOpen[h];
+    trHead.appendChild(newTh);
+  }
+
+  function renderKioskRow (kiosk) {
+    var newTr = document.createElement('tr');
+    tableEl.appendChild(newTr);
+
+    var newTd = document.createElement('td');
+    newTd.textContent = kiosk.name;
+    newTr.appendChild(newTd);
+
+    for (var f = 0; f < kiosk.numLbsHour.length; f++) {
+      var newTd = document.createElement('td');
+      newTd.textContent = kiosk.numLbsHour[f].toFixed(2);
+      newTr.appendChild(newTd);
+    }
+  }
+
+  renderKioskRow(pikePlaceMarket);
+  renderKioskRow(capitolHill);
+  renderKioskRow(seattlePublicLibrary);
+  renderKioskRow(southLakeUnion);
+  renderKioskRow(seatacAirport);
+  renderKioskRow(webSales);
+}
+
+renderTotalLbsByHour();
