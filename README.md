@@ -12,3 +12,9 @@
 * Converted object literals into constructor format
 * Built functionality to create entire list element in js instead of appending html ul
 * Built a DOM table to display total lbs sold per hour by location (shoot me)
+
+###Jan13 - CSS and html
+* Made a new data table in JS
+* Styled tables on Data page
+* Created and styled customer facing page
+* color palette: http://paletton.com/#uid=30u0u0kjdhQc28ffycWn1mLrosn
