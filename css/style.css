@@ -46,6 +46,7 @@ h3 {
   opacity: .90;
   text-align: center;
   font-size: 200%;
+  padding-top: 60px;
 }
 
 header p {
@@ -56,6 +57,7 @@ header p {
 nav {
   background-color: #674C35;
   text-align: center;
+  margin-top: 20px;
 }
 
 nav li{
@@ -66,6 +68,8 @@ nav li{
 article {
   background-color: #213521;
   opacity: .90;
+  margin-top: 20px;
+  padding: 20px;
 }
 
 article img {
@@ -74,7 +78,7 @@ article img {
 }
 
 article p {
-  color: #8E5F39;
+  color: #E27821;
 }
 
 aside {
@@ -96,6 +100,8 @@ aside img {
 .camping {
   background-color: #273045;
   opacity: .9;
+  padding: 20px;
+  margin-top: 20px;
 }
 
 .camping a {
