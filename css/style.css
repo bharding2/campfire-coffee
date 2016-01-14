@@ -42,6 +42,7 @@ h3 {
 .head {
   height: 240px;
   background-color: #273045;
+  color: #E27821;
   opacity: .90;
   text-align: center;
   font-size: 200%;
@@ -89,6 +90,7 @@ aside h3, p {
 
 aside img {
   width: 300px;
+
 }
 
 .camping {
