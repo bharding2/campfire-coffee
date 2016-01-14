@@ -95,12 +95,3 @@ aside img {
   background-color: #273045;
   opacity: .9;
 }
-
-.camping a {
-  text-decoration: none;
-  color: #8E5F39;
-}
-
-.camping a:hover {
-  color: #299129;
-}
