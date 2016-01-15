@@ -69,16 +69,50 @@ nav ul {
   margin-top: 10px;
 }
 
-nav li{
+nav li {
   display: inline;
   margin-bottom: 0px;
+  padding: 10px;
+  flex-grow: 1;
+}
+
+nav a {
+  color: inherit;
+  text-decoration: inherit;
+  margin-bottom: 0px;
+  padding: 10px;
+  flex-grow: 1;
+}
+
+.box {
+  background-color: #8E5F39;
+  border-radius: 5px;
+  color: #213521;
+  font-weight: bolder;
+  box-shadow: 0 5px 0 #423429;
+  transition-property: background-color, border-radius, color, box-shadow;
+  transition-duration: 0.1s;
+  transition-timing-function: linear;
+}
+
+.box:hover{
+  background-color: #2C3C5F;
+  border-radius: 15px;
+  color: #1AB51A;
+  box-shadow: 0 5px 0 #1D222C;
+
+}
+.box:active {
+  box-shadow: 0 2px 0 #1D222C;
+  transition: all .01s linear;
+  transform: translateY(3px);
 }
 
 article {
   background-color: #213521;
   opacity: .90;
-  margin-top: 20px;
-  padding: 20px;
+  margin-top: 30px;
+  padding: 30px;
 }
 
 article img {
@@ -90,11 +124,17 @@ article p {
   color: #E27821;
 }
 
+article a {
+  color: #1AB51A;
+  text-decoration: none;
+}
+
 aside {
   background-color: #E27821;
   opacity: .90;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 30px;
+  padding: 30px;
 }
 
 aside h3, p {
@@ -106,18 +146,18 @@ aside img {
 
 }
 
-.camping {
+.contact {
   background-color: #273045;
   opacity: .9;
   padding: 20px;
   margin-top: 20px;
 }
 
-.camping a {
+.contact a {
   text-decoration: none;
   color: #8E5F39;
 }
 
-.camping a:hover {
+.contact a:hover {
   color: #299129;
 }
