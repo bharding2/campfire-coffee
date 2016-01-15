@@ -65,6 +65,11 @@ function Kiosk (name, minCustomers, maxCustomers, cupsPerCustomer, lbsPerCustome
     this.numCupsHour = [];
     this.numCupsLbsHour = [];
     this.numToGoLbsHour = [];
+    this.numDailyTotalCustomers = 0;
+    this.numDailyTotalLbs = 0;
+    this.numDailyTotalCups = 0;
+    this.numDailyTotalCupsLbs = 0;
+    this.numDailyTotalToGoLbs = 0;
 
     for (var i = 0; i < this.hoursOpen.length; i++) {
       this.createHour(i);
@@ -313,12 +318,9 @@ function renderTotalLbsByHour () {
     }
   }
 
-  renderKioskRow(pikePlaceMarket);
-  renderKioskRow(capitolHill);
-  renderKioskRow(seattlePublicLibrary);
-  renderKioskRow(southLakeUnion);
-  renderKioskRow(seatacAirport);
-  renderKioskRow(webSales);
+  for (var t = 0; t < allKiosks.length; t++) {
+  renderKioskRow(allKiosks[t]);
+  }
 }
 
 renderTotalLbsByHour();
@@ -356,6 +358,14 @@ function handleNewKioskSubmit (event) {
   }
 
   renderProjectionsByLocation();
+
+  var containerEl2 = document.getElementById('totalLbsByHour');
+  // createNewKiosk.renderProjectionsRow(tableEl);
+  while (containerEl2.firstChild) {
+    containerEl2.removeChild(containerEl2.firstChild);
+  }
+
+  renderTotalLbsByHour();
 }
 
 newKiosk.addEventListener('submit', handleNewKioskSubmit);
