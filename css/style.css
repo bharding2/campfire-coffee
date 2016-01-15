@@ -153,11 +153,7 @@ aside img {
   margin-top: 20px;
 }
 
-.contact a {
-  text-decoration: none;
-  color: #8E5F39;
-}
-
-.contact a:hover {
-  color: #299129;
+.contact img {
+  float: right;
+  width: 300px;
 }
