@@ -42,6 +42,7 @@ function Kiosk (name, minCustomers, maxCustomers, cupsPerCustomer, lbsPerCustome
 
   this.createHour = function (hour) {
     var numCustomers = this.calcNumCustomersHour();
+
     this.numCustomersHour.push(numCustomers);
     this.numDailyTotalCustomers += this.numCustomersHour[hour];
 
@@ -59,12 +60,24 @@ function Kiosk (name, minCustomers, maxCustomers, cupsPerCustomer, lbsPerCustome
   };
 
   this.createDay = function () {
+    this.numCustomersHour = [];
+    this.numLbsHour = [];
+    this.numCupsHour = [];
+    this.numCupsLbsHour = [];
+    this.numToGoLbsHour = [];
+    this.numDailyTotalCustomers = 0;
+    this.numDailyTotalLbs = 0;
+    this.numDailyTotalCups = 0;
+    this.numDailyTotalCupsLbs = 0;
+    this.numDailyTotalToGoLbs = 0;
+
     for (var i = 0; i < this.hoursOpen.length; i++) {
       this.createHour(i);
     }
   };
 
   this.renderListHour = function (hour) {
+    // this.createDay();
     var listEl = document.createElement('li');
     listEl.textContent = this.hoursOpen[hour] + ' : ' + this.numLbsHour[hour].toFixed(2) + ' lbs [' + this.numCustomersHour[hour] + ' customers, ' + this.numCupsHour[hour].toFixed(2) + ' cups (' + this.numCupsLbsHour[hour].toFixed(2) + ' lbs), ' + this.numToGoLbsHour[hour].toFixed(2) + ' lbs to-go]';
     return listEl;
@@ -77,7 +90,7 @@ function Kiosk (name, minCustomers, maxCustomers, cupsPerCustomer, lbsPerCustome
   };
 
   this.renderFullList = function () {
-    this.createDay();
+    // this.createDay();
     var sectionEl = document.getElementById('data');
 
     var pEl = document.createElement('p');
@@ -119,6 +132,7 @@ function Kiosk (name, minCustomers, maxCustomers, cupsPerCustomer, lbsPerCustome
   };
 
   this.renderProjectionsRow = function (tableEl) {
+    this.createDay();
     var newTr = document.createElement('tr');
     tableEl.appendChild(newTr);
 
@@ -158,14 +172,11 @@ var southLakeUnion = new Kiosk('South Lake Union', 35, 88, 1.3, 3.7);
 var seatacAirport = new Kiosk('Sea-Tac Airport', 68, 124, 1.1, 2.7);
 var webSales = new Kiosk('Website Sales', 3, 6, 0, 6.7);
 
-pikePlaceMarket.createDay();
-capitolHill.createDay();
-seattlePublicLibrary.createDay();
-southLakeUnion.createDay();
-seatacAirport.createDay();
-webSales.createDay();
+var allKiosks = [pikePlaceMarket, capitolHill, seattlePublicLibrary, southLakeUnion, seatacAirport, webSales];
+
 
 function renderProjectionsByLocation () {
+
   var sectionEl = document.getElementById('projections');
 
   var h3Label = document.createElement('h3');
@@ -187,12 +198,9 @@ function renderProjectionsByLocation () {
     trHead.appendChild(newTh);
   }
 
-  pikePlaceMarket.renderProjectionsRow(tableEl);
-  capitolHill.renderProjectionsRow(tableEl);
-  seattlePublicLibrary.renderProjectionsRow(tableEl);
-  southLakeUnion.renderProjectionsRow(tableEl);
-  seatacAirport.renderProjectionsRow(tableEl);
-  webSales.renderProjectionsRow(tableEl);
+  for (var n = 0; n < allKiosks.length; n++) {
+  allKiosks[n].renderProjectionsRow(tableEl);
+  }
 
   var totalsData = [];
 
@@ -200,40 +208,50 @@ function renderProjectionsByLocation () {
     //Store Name
     totalsData.push('Total');
     //Total Daily Lbs
-    var totalsDailyTotalLbs = pikePlaceMarket.numDailyTotalLbs + capitolHill.numDailyTotalLbs + seattlePublicLibrary.numDailyTotalLbs + southLakeUnion.numDailyTotalLbs + seatacAirport.numDailyTotalLbs + webSales.numDailyTotalLbs;
-
+    var totalsDailyTotalLbs = 0;
+    for (var o = 0; o < allKiosks.length; o++) {
+     totalsDailyTotalLbs += allKiosks[o].numDailyTotalLbs;
+    }
     totalsData.push(totalsDailyTotalLbs);
 
     //Avg hourly lbs
     totalsData.push(totalsDailyTotalLbs/pikePlaceMarket.hoursOpen.length);
 
     //Total Daily Customers
-    var totalsDailyTotalCustomers = pikePlaceMarket.numDailyTotalCustomers + capitolHill.numDailyTotalCustomers + seattlePublicLibrary.numDailyTotalCustomers + southLakeUnion.numDailyTotalCustomers + seatacAirport.numDailyTotalCustomers + webSales.numDailyTotalCustomers;
-
+    var totalsDailyTotalCustomers = 0;
+    for (var p = 0; p < allKiosks.length; p++) {
+    totalsDailyTotalCustomers += allKiosks[p].numDailyTotalCustomers;
+    }
     totalsData.push(totalsDailyTotalCustomers);
 
     //Avg Hourly Customers
     totalsData.push(totalsDailyTotalCustomers/pikePlaceMarket.hoursOpen.length);
 
     //Total Daily Cups
-    var totalsDailyTotalCups = pikePlaceMarket.numDailyTotalCups + capitolHill.numDailyTotalCups + seattlePublicLibrary.numDailyTotalCups + southLakeUnion.numDailyTotalCups + seatacAirport.numDailyTotalCups + webSales.numDailyTotalCups;
-
+    var totalsDailyTotalCups = 0;
+    for (var q = 0; q < allKiosks.length; q++) {
+    totalsDailyTotalCups += allKiosks[q].numDailyTotalCups;
+    }
     totalsData.push(totalsDailyTotalCups);
 
     //Avg Hourly Cups
     totalsData.push(totalsDailyTotalCups/pikePlaceMarket.hoursOpen.length);
 
     //Total daily CupLbs
-    var totalsDailyTotalCupsLbs = pikePlaceMarket.numDailyTotalCupsLbs + capitolHill.numDailyTotalCupsLbs + seattlePublicLibrary.numDailyTotalCupsLbs + southLakeUnion.numDailyTotalCupsLbs + seatacAirport.numDailyTotalCupsLbs + webSales.numDailyTotalCupsLbs;
-
+    var totalsDailyTotalCupsLbs = 0;
+    for (var r = 0; r < allKiosks.length; r++) {
+    totalsDailyTotalCupsLbs += allKiosks[r].numDailyTotalCupsLbs;
+    }
     totalsData.push(totalsDailyTotalCupsLbs);
 
     //Avg Hourly CupLbs
     totalsData.push(totalsDailyTotalCupsLbs/pikePlaceMarket.hoursOpen.length);
 
     //Total Daily ToGo Lbs
-    var totalsDailyTotalToGoLbs = pikePlaceMarket.numDailyTotalToGoLbs + capitolHill.numDailyTotalToGoLbs + seattlePublicLibrary.numDailyTotalToGoLbs + southLakeUnion.numDailyTotalToGoLbs + seatacAirport.numDailyTotalToGoLbs + webSales.numDailyTotalToGoLbs;
-
+    var totalsDailyTotalToGoLbs = 0;
+    for (var s = 0; s < allKiosks.length; s++) {
+    totalsDailyTotalToGoLbs += allKiosks[s].numDailyTotalToGoLbs;
+    }
     totalsData.push(totalsDailyTotalToGoLbs);
 
     //Avg Daily ToGo Lbs
@@ -259,12 +277,12 @@ function renderProjectionsByLocation () {
 
 renderProjectionsByLocation();
 
-function renderTotalLbsByHour () {
+function renderCustomersByHour () {
 //table creation including label
-  var sectionEl = document.getElementById('totalLbsByHour');
+  var sectionEl = document.getElementById('customersByHour');
 
   var h3Label = document.createElement('h3');
-  h3Label.textContent = 'Total Pounds Sold Per Hour By Location'
+  h3Label.textContent = 'Total Customers Per Hour By Location'
   sectionEl.appendChild(h3Label);
 
   var tableEl = document.createElement('table');
@@ -293,19 +311,61 @@ function renderTotalLbsByHour () {
     newTd.textContent = kiosk.name;
     newTr.appendChild(newTd);
 
-    for (var f = 0; f < kiosk.numLbsHour.length; f++) {
+    for (var f = 0; f < kiosk.numCustomersHour.length; f++) {
       var tdData = document.createElement('td');
-      tdData.textContent = kiosk.numLbsHour[f].toFixed(2);
+      tdData.textContent = kiosk.numCustomersHour[f].toFixed(0);
       newTr.appendChild(tdData);
     }
   }
 
-  renderKioskRow(pikePlaceMarket);
-  renderKioskRow(capitolHill);
-  renderKioskRow(seattlePublicLibrary);
-  renderKioskRow(southLakeUnion);
-  renderKioskRow(seatacAirport);
-  renderKioskRow(webSales);
+  for (var t = 0; t < allKiosks.length; t++) {
+  renderKioskRow(allKiosks[t]);
+  }
 }
 
-renderTotalLbsByHour();
+renderCustomersByHour();
+
+// name
+// minCustomers
+// maxCustomers
+// cupsPerCustomer
+// lbsPerCustomer
+
+
+var newKiosk = document.getElementById('newKiosk');
+
+function handleNewKioskSubmit (event) {
+  console.log(event);
+  event.preventDefault();
+
+  if (!event.target.name.value || !event.target.minCustomers.value || !event.target.maxCustomers.value || !event.target.cupsPerCustomer.value || !event.target.lbsPerCustomer.value) {
+    return alert('Fields cannot be empty.');
+  }
+
+  var name = event.target.name.value;
+  var minCustomers = parseFloat(event.target.minCustomers.value);
+  var maxCustomers = parseFloat(event.target.maxCustomers.value);
+  var cupsPerCustomer = parseFloat(event.target.cupsPerCustomer.value);
+  var lbsPerCustomer = parseFloat(event.target.lbsPerCustomer.value);
+
+  var createNewKiosk = new Kiosk(name, minCustomers, maxCustomers, cupsPerCustomer, lbsPerCustomer);
+
+  allKiosks.push(createNewKiosk);
+  var containerEl = document.getElementById('projections');
+  // createNewKiosk.renderProjectionsRow(tableEl);
+  while (containerEl.firstChild) {
+    containerEl.removeChild(containerEl.firstChild);
+  }
+
+  renderProjectionsByLocation();
+
+  var containerEl2 = document.getElementById('customersByHour');
+  // createNewKiosk.renderProjectionsRow(tableEl);
+  while (containerEl2.firstChild) {
+    containerEl2.removeChild(containerEl2.firstChild);
+  }
+
+  renderCustomersByHour();
+}
+
+newKiosk.addEventListener('submit', handleNewKioskSubmit);

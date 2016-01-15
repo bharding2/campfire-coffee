@@ -18,3 +18,11 @@
 * Styled tables on Data page
 * Created and styled customer facing page
 * color palette: http://paletton.com/#uid=30u0u0kjdhQc28ffycWn1mLrosn
+
+###Jan14 - Events (partnered with Ethan Brown)
+* Ethan Brown driving: created form in data.html to submit a new kiosk
+* Ben Harding driving from here on out: added an array to hold all kiosks
+* Wrote an event handler and event listener for the new kiosk form
+* Added new kiosk to data.html tables
+* Converted both tables to handle kiosks from an array (omg)
+* Changed the total lbs by location per hour to total customers by location per hour
