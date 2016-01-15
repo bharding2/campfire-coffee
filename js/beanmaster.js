@@ -277,12 +277,12 @@ function renderProjectionsByLocation () {
 
 renderProjectionsByLocation();
 
-function renderTotalLbsByHour () {
+function renderCustomersByHour () {
 //table creation including label
-  var sectionEl = document.getElementById('totalLbsByHour');
+  var sectionEl = document.getElementById('customersByHour');
 
   var h3Label = document.createElement('h3');
-  h3Label.textContent = 'Total Pounds Sold Per Hour By Location'
+  h3Label.textContent = 'Total Customers Per Hour By Location'
   sectionEl.appendChild(h3Label);
 
   var tableEl = document.createElement('table');
@@ -311,9 +311,9 @@ function renderTotalLbsByHour () {
     newTd.textContent = kiosk.name;
     newTr.appendChild(newTd);
 
-    for (var f = 0; f < kiosk.numLbsHour.length; f++) {
+    for (var f = 0; f < kiosk.numCustomersHour.length; f++) {
       var tdData = document.createElement('td');
-      tdData.textContent = kiosk.numLbsHour[f].toFixed(2);
+      tdData.textContent = kiosk.numCustomersHour[f].toFixed(0);
       newTr.appendChild(tdData);
     }
   }
@@ -323,7 +323,7 @@ function renderTotalLbsByHour () {
   }
 }
 
-renderTotalLbsByHour();
+renderCustomersByHour();
 
 // name
 // minCustomers
@@ -359,13 +359,13 @@ function handleNewKioskSubmit (event) {
 
   renderProjectionsByLocation();
 
-  var containerEl2 = document.getElementById('totalLbsByHour');
+  var containerEl2 = document.getElementById('customersByHour');
   // createNewKiosk.renderProjectionsRow(tableEl);
   while (containerEl2.firstChild) {
     containerEl2.removeChild(containerEl2.firstChild);
   }
 
-  renderTotalLbsByHour();
+  renderCustomersByHour();
 }
 
 newKiosk.addEventListener('submit', handleNewKioskSubmit);
