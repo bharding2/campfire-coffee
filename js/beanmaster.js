@@ -280,17 +280,11 @@ function handleNewKioskEdit (event) {
   }
 
   var index = event.target.kioskIndex.value;
-  var name = event.target.name.value;
-  var minCustomers = parseFloat(event.target.minCustomers.value);
-  var maxCustomers = parseFloat(event.target.maxCustomers.value);
-  var cupsPerCustomer = parseFloat(event.target.cupsPerCustomer.value);
-  var lbsPerCustomer = parseFloat(event.target.lbsPerCustomer.value);
-
-  allKiosks[+index].name = name;
-  allKiosks[+index].minCustomers = minCustomers;
-  allKiosks[+index].maxCustomers = maxCustomers;
-  allKiosks[+index].cupsPerCustomer = cupsPerCustomer;
-  allKiosks[+index].lbsPerCustomer = lbsPerCustomer;
+  allKiosks[+index].name = event.target.name.value;
+  allKiosks[+index].minCustomers = parseFloat(event.target.minCustomers.value);
+  allKiosks[+index].maxCustomers = parseFloat(event.target.maxCustomers.value);
+  allKiosks[+index].cupsPerCustomer = parseFloat(event.target.cupsPerCustomer.value);
+  allKiosks[+index].lbsPerCustomer = parseFloat(event.target.lbsPerCustomer.value);
 
   var containerEl = document.getElementById('projections');
   while (containerEl.firstChild) {
