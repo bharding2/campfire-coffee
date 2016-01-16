@@ -170,6 +170,7 @@ function renderProjectionsByLocation () {
   var totalsDailyTotalCups = 0;
   var totalsDailyTotalCupsLbs = 0;
   var totalsDailyTotalToGoLbs = 0;
+
   for (var o = 0; o < allKiosks.length; o++) {
    totalsDailyTotalLbs += allKiosks[o].numDailyTotalLbs;
    totalsDailyTotalCustomers += allKiosks[o].numDailyTotalCustomers;
@@ -177,6 +178,7 @@ function renderProjectionsByLocation () {
    totalsDailyTotalCupsLbs += allKiosks[o].numDailyTotalCupsLbs;
    totalsDailyTotalToGoLbs += allKiosks[o].numDailyTotalToGoLbs;
   }
+
   totalsData.push(totalsDailyTotalLbs);
   totalsData.push(totalsDailyTotalLbs/allKiosks[0].hoursOpen.length);
   totalsData.push(totalsDailyTotalCustomers);
@@ -201,7 +203,6 @@ function renderProjectionsByLocation () {
     newTr.appendChild(tdData);
   }
 }
-
 renderProjectionsByLocation();
 
 function renderCustomersByHour () {
@@ -231,7 +232,6 @@ function renderCustomersByHour () {
   allKiosks[t].renderCustomersByHourRow(tableEl);
   }
 }
-
 renderCustomersByHour();
 
 var newKiosk = document.getElementById('newKiosk');
@@ -256,17 +256,21 @@ function handleNewKioskSubmit (event) {
   while (containerEl.firstChild) {
     containerEl.removeChild(containerEl.firstChild);
   }
-
   renderProjectionsByLocation();
 
   var containerEl2 = document.getElementById('customersByHour');
   while (containerEl2.firstChild) {
     containerEl2.removeChild(containerEl2.firstChild);
   }
-
   renderCustomersByHour();
-}
 
+  var kioskSelect = document.getElementById('kioskIndex');
+  var optionEl = document.createElement('option');
+  optionEl.setAttribute('value', allKiosks.length - 1);
+  optionEl.setAttribute('id', allKiosks.length - 1);
+  optionEl.textContent = name;
+  kioskSelect.appendChild(optionEl);
+}
 newKiosk.addEventListener('submit', handleNewKioskSubmit);
 
 var newEdit = document.getElementById('editKiosk');
@@ -286,19 +290,18 @@ function handleNewKioskEdit (event) {
   allKiosks[+index].cupsPerCustomer = parseFloat(event.target.cupsPerCustomer.value);
   allKiosks[+index].lbsPerCustomer = parseFloat(event.target.lbsPerCustomer.value);
 
+  document.getElementById(index).textContent = allKiosks[+index].name;
+
   var containerEl = document.getElementById('projections');
   while (containerEl.firstChild) {
     containerEl.removeChild(containerEl.firstChild);
   }
-
   renderProjectionsByLocation();
 
   var containerEl2 = document.getElementById('customersByHour');
   while (containerEl2.firstChild) {
     containerEl2.removeChild(containerEl2.firstChild);
   }
-
   renderCustomersByHour();
 }
-
 newEdit.addEventListener('submit', handleNewKioskEdit );
