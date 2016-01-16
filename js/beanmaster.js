@@ -234,6 +234,7 @@ function renderCustomersByHour () {
 }
 renderCustomersByHour();
 
+var lastKioskIndex = 5;
 var newKiosk = document.getElementById('newKiosk');
 
 function handleNewKioskSubmit (event) {
@@ -263,6 +264,14 @@ function handleNewKioskSubmit (event) {
     containerEl2.removeChild(containerEl2.firstChild);
   }
   renderCustomersByHour();
+
+  lastKioskIndex++;
+  var kioskSelect = document.getElementById('kioskIndex');
+  var optionEl = document.createElement('option');
+  optionEl.setAttribute('value', lastKioskIndex);
+  optionEl.setAttribute('id', lastKioskIndex);
+  optionEl.textContent = name;
+  kioskSelect.appendChild(optionEl);
 }
 newKiosk.addEventListener('submit', handleNewKioskSubmit);
 
@@ -284,9 +293,6 @@ function handleNewKioskEdit (event) {
   allKiosks[+index].lbsPerCustomer = parseFloat(event.target.lbsPerCustomer.value);
 
   document.getElementById(index).textContent = allKiosks[+index].name;
-  // if (+index > 4 && !getElementById(index)) {   or try/catch error
-  // getElementById(kioskIndex).appendChild('option value="' + index +'" id="' + +index + '"');  or appendChild +setAttribute x 2 or innerhtml?
-  // }
 
   var containerEl = document.getElementById('projections');
   while (containerEl.firstChild) {
