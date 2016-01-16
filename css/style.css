@@ -177,3 +177,8 @@ legend {
 input {
   color: #1D222C;
 }
+
+.outro {
+  background-color: #273045;
+  opacity: 0.9;
+}
