@@ -26,3 +26,9 @@
 * Added new kiosk to data.html tables
 * Converted both tables to handle kiosks from an array (omg)
 * Changed the total lbs by location per hour to total customers by location per hour
+
+###Jan15 - Cleanup
+* Refactored js code (over 100 lines deleted!)
+* Sweet animated buttons on index
+* Internal nav links added
+* Styling fixes
