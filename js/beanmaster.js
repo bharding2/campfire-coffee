@@ -283,9 +283,9 @@ function handleNewKioskEdit (event) {
   allKiosks[+index].cupsPerCustomer = parseFloat(event.target.cupsPerCustomer.value);
   allKiosks[+index].lbsPerCustomer = parseFloat(event.target.lbsPerCustomer.value);
 
-  document.getElementById(+index).textContent = allKiosks[+index].name;
-  // if (+index > 4 && !getElementById(+index)) {
-  // getElementById(kioskIndex).appendChild('option value="' + +index +'" id="' + +index + '"');
+  document.getElementById(index).textContent = allKiosks[+index].name;
+  // if (+index > 4 && !getElementById(index)) {   or try/catch error
+  // getElementById(kioskIndex).appendChild('option value="' + index +'" id="' + +index + '"');  or appendChild +setAttribute x 2 or innerhtml?
   // }
 
   var containerEl = document.getElementById('projections');
