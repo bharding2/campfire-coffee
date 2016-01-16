@@ -3,7 +3,7 @@
 201d5 week 2 project
 
 CSS/HTML layout uses Skeleton : http://http://getskeleton.com/
-Logo image campfire7.png created by David Heyduck
+Logo image campfire-logo.png created by David Heyduck
 
 ###Jan 11 - object literals
 * Worked out the math
