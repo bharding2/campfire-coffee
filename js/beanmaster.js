@@ -268,3 +268,43 @@ function handleNewKioskSubmit (event) {
 }
 
 newKiosk.addEventListener('submit', handleNewKioskSubmit);
+
+var newEdit = document.getElementById('editKiosk');
+
+function handleNewKioskEdit (event) {
+  console.log(event);
+  event.preventDefault();
+
+  if (!event.target.name.value || !event.target.minCustomers.value || !event.target.maxCustomers.value || !event.target.cupsPerCustomer.value || !event.target.lbsPerCustomer.value) {
+    return alert('Fields cannot be empty.');
+  }
+
+  var index = event.target.kioskIndex.value;
+  var name = event.target.name.value;
+  var minCustomers = parseFloat(event.target.minCustomers.value);
+  var maxCustomers = parseFloat(event.target.maxCustomers.value);
+  var cupsPerCustomer = parseFloat(event.target.cupsPerCustomer.value);
+  var lbsPerCustomer = parseFloat(event.target.lbsPerCustomer.value);
+
+  allKiosks[+index].name = name;
+  allKiosks[+index].minCustomers = minCustomers;
+  allKiosks[+index].maxCustomers = maxCustomers;
+  allKiosks[+index].cupsPerCustomer = cupsPerCustomer;
+  allKiosks[+index].lbsPerCustomer = lbsPerCustomer;
+
+  var containerEl = document.getElementById('projections');
+  while (containerEl.firstChild) {
+    containerEl.removeChild(containerEl.firstChild);
+  }
+
+  renderProjectionsByLocation();
+
+  var containerEl2 = document.getElementById('customersByHour');
+  while (containerEl2.firstChild) {
+    containerEl2.removeChild(containerEl2.firstChild);
+  }
+
+  renderCustomersByHour();
+}
+
+newEdit.addEventListener('submit', handleNewKioskEdit );
