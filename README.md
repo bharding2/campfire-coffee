@@ -3,6 +3,7 @@
 201d5 week 2 project
 
 CSS/HTML layout uses Skeleton : http://http://getskeleton.com/
+Logo image campfire7.png created by David Heyduck
 
 ###Jan 11 - object literals
 * Worked out the math
@@ -40,3 +41,4 @@ CSS/HTML layout uses Skeleton : http://http://getskeleton.com/
 * Form elements update when editing kiosks
 * New corresponding form elements created along with new kiosk so new kiosks can be edited
 * Styling for data.html
+* Added a Heyduck image
