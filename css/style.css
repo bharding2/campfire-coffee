@@ -14,16 +14,19 @@ table, tr, td, th {
 }
 
 tr:nth-child(odd) {
-  background-color: #213521;
+  background-color: #618061;
+  color: #1D222C;
 }
 
 tr:nth-child(even) {
-  background-color: #674C35;
+  background-color: #837C76;
+  color: #1D222C;
 }
 
 th {
   text-align: center;
   background-color: #273045;
+  color: #B87131;
 }
 
 td {
@@ -33,6 +36,7 @@ td {
 
 h3 {
   color: #299129;
+  font-weight: bolder;
 }
 
 .logo {
@@ -156,4 +160,26 @@ aside img {
 .contact img {
   float: right;
   width: 300px;
+}
+
+form {
+  background-color: #273045;
+  opacity: 0.9;
+  padding: 30px;
+}
+
+legend {
+  color: #1AB51A;
+  font-weight: bolder;
+  text-align: right;
+}
+
+input {
+  color: #1D222C;
+}
+
+.outro {
+  background-color: #E27821;
+  opacity: 0.9;
+  border-radius: 145px;
 }

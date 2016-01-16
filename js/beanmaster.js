@@ -7,7 +7,7 @@ function Kiosk (name, minCustomers, maxCustomers, cupsPerCustomer, lbsPerCustome
   this.maxCustomers = maxCustomers;
   this.cupsPerCustomer = cupsPerCustomer;
   this.lbsPerCustomer = lbsPerCustomer;
-  this.hoursOpen = ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12 noon', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm'],
+  this.hoursOpen = ['6:00 am', '7:00 am', '8:00 am', '9:00 am', '10:00 am', '11:00 am', '12 noon', '1:00 pm', '2:00 pm', '3:00 pm', '4:00 pm', '5:00 pm', '6:00 pm', '7:00 pm', '8:00 pm'],
   this.numCustomersHour = [];
   this.numLbsHour = [];
   this.numCupsHour = [];
@@ -115,9 +115,9 @@ Kiosk.prototype.renderCustomersByHourRow = function(tableEl) {
   var newTr = document.createElement('tr');
   tableEl.appendChild(newTr);
 
-  var newTd = document.createElement('td');
-  newTd.textContent = this.name;
-  newTr.appendChild(newTd);
+  var newTh = document.createElement('th');
+  newTh.textContent = this.name;
+  newTr.appendChild(newTh);
 
   for (var f = 0; f < this.numCustomersHour.length; f++) {
     var tdData = document.createElement('td');
