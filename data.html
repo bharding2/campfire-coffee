@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Campfire Coffee Beanmaster</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+  </head>
+  <body>
+    <h3>New kiosk entry form</h3>
+    <form id="newKiosk">
+      <fieldset>
+        <legend> Enter Kiosk Data</legend>
+
+        <label for="name"> Name </label>
+        <input name="name"  type="text">
+
+        <label for="minCustomers"> minCustomers </label>
+        <input name="minCustomers"  type="text">
+
+        <label for="maxCustomers"> maxCustomers </label>
+        <input name="maxCustomers"  type="text">
+
+        <label for="cupsPerCustomer"> cupsPerCustomer </label>
+        <input name="cupsPerCustomer"  type="text">
+
+        <label for="lbsPerCustomer"> lbsPerCustomer </label>
+        <input name="lbsPerCustomer"  type="text">
+
+        <button id="submitKiosk" type="submit">Submit</button>
+      </fieldset>
+    </form>
+
+    <h3>Edit Exisiting Store</h3>
+    <form id="editKiosk">
+      <fieldset>
+        <legend>Edit Kiosk Data</legend>
+
+        <select name="kioskIndex">
+          <option value="0">Pike Place Market</option>
+          <option value="1">Capitol Hill</option>
+          <option value="2">Seattle Public Library</option>
+          <option value="3">South Lake Union</option>
+          <option value="4">Sea-Tac Airport</option>
+        </select>
+
+        <label for="name"> Name </label>
+        <input name="name"  type="text">
+
+        <label for="minCustomers"> minCustomers </label>
+        <input name="minCustomers"  type="text">
+
+        <label for="maxCustomers"> maxCustomers </label>
+        <input name="maxCustomers"  type="text">
+
+        <label for="cupsPerCustomer"> cupsPerCustomer </label>
+        <input name="cupsPerCustomer"  type="text">
+
+        <label for="lbsPerCustomer"> lbsPerCustomer </label>
+        <input name="lbsPerCustomer"  type="text">
+
+        <button id="submitEdit" type="submit">Submit</button>
+      </fieldset>
+    </form>
+
+
+    <section id="projections">
+    </section>
+    <section id="customersByHour">
+    </section>
+    <script type="text/javascript" src="js/beanmaster.js"></script>
+  </body>
+</html>
