@@ -39,3 +39,4 @@ CSS/HTML layout uses Skeleton : http://http://getskeleton.com/
 ###Jan15
 * Form elements update when editing kiosks
 * New corresponding form elements created along with new kiosk so new kiosks can be edited
+* Styling for data.html
