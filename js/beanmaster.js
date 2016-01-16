@@ -234,7 +234,6 @@ function renderCustomersByHour () {
 }
 renderCustomersByHour();
 
-var lastKioskIndex = 5;
 var newKiosk = document.getElementById('newKiosk');
 
 function handleNewKioskSubmit (event) {
@@ -265,11 +264,10 @@ function handleNewKioskSubmit (event) {
   }
   renderCustomersByHour();
 
-  lastKioskIndex++;
   var kioskSelect = document.getElementById('kioskIndex');
   var optionEl = document.createElement('option');
-  optionEl.setAttribute('value', lastKioskIndex);
-  optionEl.setAttribute('id', lastKioskIndex);
+  optionEl.setAttribute('value', allKiosks.length - 1);
+  optionEl.setAttribute('id', allKiosks.length - 1);
   optionEl.textContent = name;
   kioskSelect.appendChild(optionEl);
 }
